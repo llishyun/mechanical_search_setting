@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 outputs/
 *.mp4
+mechanical_search_isaac_sh/assets/
+past_ver/
