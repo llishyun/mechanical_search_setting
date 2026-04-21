@@ -68,11 +68,7 @@ def _make_pile_cfg(idx: int) -> RigidObjectCfg:
             usd_path=usd_path,
             rigid_props=sim_utils.RigidBodyPropertiesCfg(
                 solver_position_iteration_count=16,
-                solver_velocity_iteration_count=4,
-                max_angular_velocity=100.0,
-                max_linear_velocity=100.0,
-                max_depenetration_velocity=5.0,
-                disable_gravity=False,
+                solver_velocity_iteration_count=4
             ),
             mass_props=sim_utils.MassPropertiesCfg(mass=0.1),
             collision_props=sim_utils.CollisionPropertiesCfg(
@@ -127,12 +123,12 @@ class MechSearchSceneCfg(InteractiveSceneCfg):
         spawn=sim_utils.DomeLightCfg(color=(0.75, 0.75, 0.75), intensity=800.0),
     )
 
-    # Boundary walls: 1.2×1.2 m square, centre=(0.5, 0), height=12 cm, semi-transparent
+    # Boundary walls: 1.0×1.0 m square, centre=(0.5, 0), height=12 cm, semi-transparent
     wall_x_neg = AssetBaseCfg(
         prim_path="{ENV_REGEX_NS}/WallXNeg",
-        init_state=AssetBaseCfg.InitialStateCfg(pos=(-0.1, 0.0, 0.06)),
+        init_state=AssetBaseCfg.InitialStateCfg(pos=(0.0, 0.0, 0.06)),
         spawn=sim_utils.CuboidCfg(
-            size=(0.02, 1.20, 0.12),
+            size=(0.02, 1.00, 0.12),
             collision_props=sim_utils.CollisionPropertiesCfg(collision_enabled=True),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 0.5, 1.0), opacity=0.2),
             visible=True,
@@ -140,9 +136,9 @@ class MechSearchSceneCfg(InteractiveSceneCfg):
     )
     wall_x_pos = AssetBaseCfg(
         prim_path="{ENV_REGEX_NS}/WallXPos",
-        init_state=AssetBaseCfg.InitialStateCfg(pos=(1.1, 0.0, 0.06)),
+        init_state=AssetBaseCfg.InitialStateCfg(pos=(1.0, 0.0, 0.06)),
         spawn=sim_utils.CuboidCfg(
-            size=(0.02, 1.20, 0.12),
+            size=(0.02, 1.00, 0.12),
             collision_props=sim_utils.CollisionPropertiesCfg(collision_enabled=True),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 0.5, 1.0), opacity=0.2),
             visible=True,
@@ -150,9 +146,9 @@ class MechSearchSceneCfg(InteractiveSceneCfg):
     )
     wall_y_neg = AssetBaseCfg(
         prim_path="{ENV_REGEX_NS}/WallYNeg",
-        init_state=AssetBaseCfg.InitialStateCfg(pos=(0.5, -0.6, 0.06)),
+        init_state=AssetBaseCfg.InitialStateCfg(pos=(0.5, -0.5, 0.06)),
         spawn=sim_utils.CuboidCfg(
-            size=(1.20, 0.02, 0.12),
+            size=(1.00, 0.02, 0.12),
             collision_props=sim_utils.CollisionPropertiesCfg(collision_enabled=True),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 0.5, 1.0), opacity=0.2),
             visible=True,
@@ -160,9 +156,9 @@ class MechSearchSceneCfg(InteractiveSceneCfg):
     )
     wall_y_pos = AssetBaseCfg(
         prim_path="{ENV_REGEX_NS}/WallYPos",
-        init_state=AssetBaseCfg.InitialStateCfg(pos=(0.5, 0.6, 0.06)),
+        init_state=AssetBaseCfg.InitialStateCfg(pos=(0.5, 0.5, 0.06)),
         spawn=sim_utils.CuboidCfg(
-            size=(1.20, 0.02, 0.12),
+            size=(1.00, 0.02, 0.12),
             collision_props=sim_utils.CollisionPropertiesCfg(collision_enabled=True),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 0.5, 1.0), opacity=0.2),
             visible=True,
@@ -242,7 +238,7 @@ class MechSearchEnvCfg:
         physx=sim_utils.PhysxCfg(
             solver_type=1,
             enable_ccd=True,
-            bounce_threshold_velocity=0.2,
+            bounce_threshold_velocity=0.5,
         ),
     )
 
